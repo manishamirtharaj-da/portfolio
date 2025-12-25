@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manisha D A - UI/UX & Graphic Designer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --purple-900: #1a0b2e;
+            --purple-800: #2d1b4e;
+            --purple-600: #6b46c1;
+            --purple-400: #9f7aea;
+            --purple-300: #b794f6;
+            --purple-100: #e9d8fd;
+            --cyan: #06b6d4;
+            --pink: #ec4899;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--purple-900);
+            color: white;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--cyan), var(--pink));
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.6;
+            filter: blur(10px);
+            transition: transform 0.1s ease;
+        }
+
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 1;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+        }
+
+        .aurora {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .aurora-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, var(--purple-600) 0%, transparent 60%);
+            animation: aurora 20s ease-in-out infinite;
+        }
+
+        .aurora-layer:nth-child(2) {
+            background: radial-gradient(ellipse at center, var(--cyan) 0%, transparent 60%);
+            animation: aurora 15s ease-in-out infinite reverse;
+        }
+
+        .aurora-layer:nth-child(3) {
+            background: radial-gradient(ellipse at center, var(--pink) 0%, transparent 60%);
+            animation: aurora 25s ease-in-out infinite;
+        }
+
+        @keyframes aurora {
+            0%, 100% { transform: translate(0%, 0%) rotate(0deg); }
+            33% { transform: translate(30%, -20%) rotate(120deg); }
+            66% { transform: translate(-20%, 30%) rotate(240deg); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        nav {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(26, 11, 46, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(159, 122, 234, 0.2);
+            border-radius: 50px;
+            padding: 0.8rem 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-items {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-items a {
+            color: var(--purple-100);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-items a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--cyan), var(--pink));
+            transition: width 0.3s, left 0.3s;
+        }
+
+        .nav-items a:hover {
+            color: white;
+        }
+
+        .nav-items a:hover::before {
+            width: 100%;
+            left: 0;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 8rem 0 4rem;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(159, 122, 234, 0.1);
+            border: 1px solid rgba(159, 122, 234, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            color: var(--purple-300);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: 6rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--purple-300) 50%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.03em;
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            color: var(--purple-300);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--purple-600), var(--cyan));
+            color: white;
+            border: none;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--cyan), var(--pink));
+            transition: left 0.3s;
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before {
+            left: 0;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--purple-400);
+        }
+
+        .btn-secondary:hover {
+            background: var(--purple-400);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(159, 122, 234, 0.3);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--purple-400);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            padding-top: 8px;
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            width: 4px;
+            height: 10px;
+            background: var(--purple-400);
+            border-radius: 2px;
+            animation: scroll 2s ease-in-out infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(20px); opacity: 0; }
+        }
+
+        section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, white, var(--purple-300));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.5);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .bento-item {
+            background: rgba(159, 122, 234, 0.05);
+            border: 1px solid rgba(159, 122, 234, 0.2);
+            border-radius: 24px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--purple-600), var(--cyan));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .bento-item:hover {
+            border-color: var(--purple-400);
+            transform: translateY(-5px);
+        }
+
+        .bento-item:hover::before {
+            opacity: 0.05;
+        }
+
+        .bento-item > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .bento-large {
+            grid-column: span 8;
+        }
+
+        .bento-medium {
+            grid-column: span 4;
+        }
+
+        .bento-small {
+            grid-column: span 4;
+        }
+
+        .bento-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .bento-item p, .bento-item li {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+        }
+
+        .bento-item ul {
+            list-style: none;
+        }
+
+        .bento-item li::before {
+            content: '→';
+            color: var(--cyan);
+            margin-right: 0.5rem;
+        }
+
+        .stat {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--cyan), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: -3rem;
+            width: 2px;
+            background: linear-gradient(180deg, var(--cyan), var(--purple-600));
+        }
+
+        .timeline-item:last-child::before {
+            background: linear-gradient(180deg, var(--cyan), transparent);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -8px;
+            top: 6px;
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(135deg, var(--cyan), var(--pink));
+            border-radius: 50%;
+            border: 3px solid var(--purple-900);
+            box-shadow: 0 0 20px var(--cyan);
+        }
+
+        .timeline-content {
+            background: rgba(159, 122, 234, 0.05);
+            border: 1px solid rgba(159, 122, 234, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-content h3 {
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .timeline-date {
+            color: var(--cyan);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .timeline-company {
+            color: var(--purple-300);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .projects-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(159, 122, 234, 0.05);
+            border: 1px solid rgba(159, 122, 234, 0.2);
+            border-radius: 24px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--purple-600), var(--cyan));
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 0;
+        }
+
+        .project-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--cyan);
+            box-shadow: 0 20px 60px rgba(6, 182, 212, 0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, var(--purple-800), var(--purple-600));
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(255, 255, 255, 0.03) 2px,
+                rgba(255, 255, 255, 0.03) 4px
+            );
+        }
+
+        .project-icon {
+            font-size: 4rem;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+            z-index: 1;
+        }
+
+        .project-info {
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-number {
+            font-size: 0.85rem;
+            color: var(--cyan);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-info h3 {
+            font-size: 1.4rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .project-info p {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skill-item {
+            background: rgba(159, 122, 234, 0.05);
+            border: 1px solid rgba(159, 122, 234, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .skill-item:hover {
+            border-color: var(--cyan);
+            transform: scale(1.05);
+            background: rgba(6, 182, 212, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.5));
+        }
+
+        .skill-item h4 {
+            color: white;
+            font-size: 1rem;
+        }
+
+        footer {
+            background: rgba(26, 11, 46, 0.8);
+            border-top: 1px solid rgba(159, 122, 234, 0.2);
+            padding: 4rem 0 2rem;
+            margin-top: 8rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--cyan);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(159, 122, 234, 0.1);
+            border: 1px solid rgba(159, 122, 234, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, var(--cyan), var(--pink));
+            border-color: transparent;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(159, 122, 234, 0.2);
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        @media (max-width: 968px) {
+            .hero h1 {
+                font-size: 4rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .bento-large,
+            .bento-medium,
+            .bento-small {
+                grid-column: span 12;
+            }
+
+            .nav-items {
+                gap: 1rem;
+            }
+
+            .projects-showcase {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav {
+                width: calc(100% - 2rem);
+                padding: 0.6rem 1rem;
+            }
+
+            .nav-items {
+                gap: 0.8rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-follower"></div>
+    <div class="grain"></div>
+    <div class="aurora">
+        <div class="aurora-layer"></div>
+        <div class="aurora-layer"></div>
+        <div class="aurora-layer"></div>
+    </div>
+
+    <nav>
+        <ul class="nav-items">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Journey</a></li>
+            <li><a href="#projects">Work</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">✨ Available for freelance work</div>
+                <h1>Manisha D A</h1>
+                <p class="tagline">UI/UX Designer · Visual Storyteller · Digital Creator</p>
+                <p>Transforming ideas into stunning digital experiences through thoughtful design and creative innovation. Specializing in user-centered interfaces that captivate and convert.</p>
+                <div class="cta-group">
+                    <a href="#projects" class="btn btn-primary">Explore My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Let's Connect</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">About Me</div>
+                <h2 class="section-title">Crafting Digital Excellence</h2>
+                <p class="section-subtitle">A passionate designer with a blend of technical expertise and creative vision</p>
+            </div>
+
+            <div class="bento-grid">
+                <div class="bento-item bento-large">
+                    <h3>🎓 Educational Foundation</h3>
+                    <p style="margin-bottom: 1.5rem;">Building a strong technical and creative foundation through dedicated learning and academic excellence.</p>
+                    <ul>
+                        <li><strong>B.Tech in Information Technology</strong> - 8.7 CGPA</li>
+                        <li>Adhiyamaan College of Engineering, Hosur (2025)</li>
+                        <li><strong>Higher Secondary (Computer Science)</strong> - 89%</li>
+                        <li>CSI Christ Matriculation School (2021)</li>
+                        <li><strong>Secondary School</strong> - 84%</li>
+                        <li>CSI Christ Matriculation School (2019)</li>
+                    </ul>
+                </div>
+
+                <div class="bento-item bento-medium">
+                    <div class="stat">6+</div>
+                    <h3>Projects Completed</h3>
+                    <p>From landing pages to comprehensive UI systems, delivering quality designs across various domains.</p>
+                </div>
+
+                <div class="bento-item bento-small">
+                    <div class="stat">2</div>
+                    <h3>Internships</h3>
+                    <p>Hands-on experience in UI/UX and graphic design.</p>
+                </div>
+
+                <div class="bento-item bento-small">
+                    <div class="stat">1+</div>
+                    <h3>Years Experience</h3>
+                    <p>Professional work in design and branding.</p>
+                </div>
+
+                <div class="bento-item bento-small">
+                    <h3>🎨 Design Philosophy</h3>
+                    <p>User-centered design meets aesthetic excellence. Every pixel has purpose.</p>
+                </div>
+
+                <div class="bento-item bento-medium">
+                    <h3>🏆 Certified Professional</h3>
+                    <p><strong>UI/UX Design Certification</strong></p>
+                    <p>Apollo Institute (2025)</p>
+                    <p style="margin-top: 1rem; color: var(--purple-300);">Mastered user research, prototyping, interaction design, and visual design principles.</p>
+                </div>
+
+                <div class="bento-item bento-medium">
+                    <h3>💡 Core Expertise</h3>
+                    <ul>
+                        <li>User Interface Design</li>
+                        <li>User Experience Research</li>
+                        <li>Brand Identity & Guidelines</li>
+                        <li>Landing Page Design</li>
+                        <li>Responsive Web Design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Career Path</div>
+                <h2 class="section-title">Professional Journey</h2>
+                <p class="section-subtitle">From learning to leading - my design evolution</p>
+            </div>
+
+            <div class="experience-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Graphic Designer</h3>
+                        <div class="timeline-date">November 2025 - Present</div>
+                        <div class="timeline-company">Future Accessories LLP (via Sequel Contract)</div>
+                        <p>Leading visual design initiatives, creating compelling brand materials, and developing cohesive design systems for diverse client portfolios. Collaborating with cross-functional teams to deliver high-impact creative solutions.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>UI/UX Design Certification</h3>
+                        <div class="timeline-date">2025</div>
+                        <div class="timeline-company">Apollo Institute</div>
+                        <p>Completed comprehensive training in user experience design, interface design, prototyping, user research methodologies, and design thinking processes.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Graphic Design Intern</h3>
+                        <div class="timeline-date">January 2025 - April 2025</div>
+                        <div class="timeline-company">Process Drive India Private Limited</div>
+                        <p>Developed brand identities, marketing collateral, and visual assets for multiple clients. Gained experience in print design, digital graphics, and brand strategy implementation.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>UI/UX Designer Intern</h3>
+                        <div class="timeline-date">June 2024 - July 2024</div>
+                        <div class="timeline-company">JRM Info Tech</div>
+                        <p>Designed intuitive user interfaces for web applications, conducted user research sessions, created wireframes and prototypes, and collaborated with developers to implement designs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Portfolio</div>
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">A showcase of my latest design work and creative solutions</p>
+            </div>
+
+            <div class="projects-showcase">
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-icon">💪</div>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-number">Project 01</div>
+                        <h3>Unleashing Women's Fitness</h3>
+                        <p>An empowering fitness platform landing page designed specifically for women, featuring motivational design elements, intuitive navigation, and a vibrant color palette that energizes and inspires action.</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-icon">🥗</div>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-number">Project 02</div>
+                        <h3>Healthy Choices at Your Fingertips</h3>
+                        <p>A nutrition-focused landing page promoting healthy lifestyle choices through clean design, accessible information architecture, and engaging visual storytelling that makes healthy living feel achievable.</p>
+                    </div>
